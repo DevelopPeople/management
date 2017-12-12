@@ -1,0 +1,183 @@
+    <div class="bg-white">
+	<div class="clearfix row">
+		<ul class="nav nav-pills pull-right" style="margin-right: 15px; margin-top: 10px;" role="tablist">
+			<li role="presentation">
+				<a href="#" onclick="goBackLast()" style="background: red;border-top-color:red;color: white;">返回</a>
+			</li>
+			<li role="presentation" class="active">
+				<a href="#" style="background: #00a65a;border-top-color:#00a65a">剩余数量<span class="badge" style="color: #00a65a;">{{data.remaining}}</span></a>
+			</li>
+			<li role="presentation" class="active">
+				<a href="#">浏览次数<span class="badge">{{data.viewNum}}</span></a>
+			</li>
+			<li role="presentation">
+				<a href="#" style="background: #f39c12;border-top-color:#f39c12">完成量<span class="badge" style="background: white;color: #f39c12;">{{data.completeNum}}</span></a>
+			</li>
+			
+		</ul>
+
+		<div class="page-header">
+			<h3 class="ml20">产品图 </h3>
+		</div>
+	</div>
+
+	<div class="bs-example" data-example-id="thumbnails-with-custom-content">
+		<div class="row">
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img  src="{{data.coverImage}}" style="height: 200px; width: 100%; display: block;">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+</div>    
+    
+        
+        			
+	<div class="bg-white mt20">
+	<div class="clearfix row">
+		<ul class="nav nav-pills pull-right" style="margin-right: 15px; margin-top: 10px;" role="tablist">
+			<!--<li role="presentation" class="active">
+				<a href="#">浏览次数<span class="badge">{{data.viewNum}}</span></a>
+			</li>
+			<li role="presentation">
+				<a href="#">完成量<span class="badge">{{data.completeNum}}</span></a>
+			</li>-->
+			<li role="presentation" class="active mr10">
+				<a href="" data-toggle="modal" data-target="#myModal-ztadd">添加产品整体图</a>
+			</li>
+		</ul>
+
+		<div class="page-header">
+			<h3 class="ml20">产品整体图</h3>
+		</div>
+	</div>
+
+	<div class="bs-example" id="detailBox"  data-example-id="thumbnails-with-custom-content">
+		<div class="row">
+			{{#data.zt}}
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img src="{{detailImgAll}}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+					<div class="caption">
+						<p class="clearfix">
+							<span class="pull-left">
+								<b>名称:   </b>{{name}}
+							</span>
+							<span class="pull-right">
+								<b>类型:   </b>{{typeText}}
+							</span>
+						</p>
+						<p class="clearfix">
+							<a class="btn btn-info pull-left edit-detail" role="button" data-toggle="modal" data-target="#myModal-edit" value="{{id}}:{{name}}:{{type}}:{{detailImg}}">编辑</a>
+		  					<a class="btn btn-danger pull-right del-detail" role="button" data-toggle="modal" data-target="#myModal-topdel" value="{{id}}:{{name}}">删除</a> 
+		  				</p>
+					</div>
+				</div>
+			</div>
+			{{/data.zt}}
+			
+		</div>
+	</div>
+
+</div>
+
+
+	<div class="bg-white mt20">
+	<div class="clearfix row">
+		<ul class="nav nav-pills pull-right" style="margin-right: 15px; margin-top: 10px;" role="tablist">
+			<!--<li role="presentation" class="active">
+				<a href="#">浏览次数<span class="badge">{{data.viewNum}}</span></a>
+			</li>
+			<li role="presentation">
+				<a href="#">完成量<span class="badge">{{data.completeNum}}</span></a>
+			</li>-->
+			<li role="presentation" class="active mr10">
+				<a href="" data-toggle="modal" data-target="#myModal-xjadd">添加产品细节图</a>
+			</li>
+		</ul>
+
+		<div class="page-header">
+			<h3 class="ml20">产品细节图</h3>
+		</div>
+	</div>
+
+	<div class="bs-example" id="detailBox"  data-example-id="thumbnails-with-custom-content">
+		<div class="row">
+			{{#data.xj}}
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img src="{{detailImgAll}}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+					<div class="caption">
+						<p class="clearfix">
+							<span class="pull-left">
+								<b>名称:   </b>{{name}}
+							</span>
+							<span class="pull-right">
+								<b>类型:   </b>{{typeText}}
+							</span>
+						</p>
+						<p class="clearfix">
+							<a class="btn btn-info pull-left edit-detail" role="button" data-toggle="modal" data-target="#myModal-edit" value="{{id}}:{{name}}:{{type}}:{{detailImg}}">编辑</a>
+		  					<a class="btn btn-danger pull-right del-detail" role="button" data-toggle="modal" data-target="#myModal-topdel" value="{{id}}:{{name}}">删除</a> 
+		  				</p>
+					</div>
+				</div>
+			</div>
+			{{/data.xj}}
+			
+		</div>
+	</div>
+
+</div>
+
+<div class="bg-white mt20">
+	<div class="clearfix row">
+		<ul class="nav nav-pills pull-right" style="margin-right: 15px; margin-top: 10px;" role="tablist">
+			<li role="presentation" class="active mr10">
+				<a href="" data-toggle="modal" data-target="#myModal-bottomadd" >关联组件</a>
+			</li>
+			<!--<li role="presentation">
+				<a href="#">完成量<span class="badge">{{data.completeNum}}</span></a>
+			</li>-->
+		</ul>
+
+		<div class="page-header">
+			<h3 class="ml20">产品组件</h3>
+		</div>
+	</div>
+
+	<div class="bs-example" id="componentBox" data-example-id="thumbnails-with-custom-content">
+		<div class="row">
+			{{#data.moduleTOList}}
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img  src="{{detailImgAll}}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+					<div class="caption">
+						<p class="clearfix">
+							<span class="pull-left">
+								<b>名称:   </b>{{name}}
+							</span>
+							<span class="pull-right">
+								<b>数量:   </b>{{num}}
+							</span>
+						</p>
+						<p>
+							<b>备注: </b>
+							{{memo}}
+						</p>
+		  				<p class="clearfix">
+		  					<!--<a class="btn btn-info pull-left edit-compont" role="button" data-toggle="modal" data-target="#myModal-editCom" value="{{id}}:{{name}}:{{remaining}}:{{productCategoryTO.id}}:{{productCategoryTO.name}}:{{available}}:{{coverImage}}">编辑</a>-->
+		  					<a class="btn btn-danger pull-right del-detail" role="button" data-toggle="modal" data-target="#myModal-bottomdel" value="{{id}}:{{name}}">删除</a> 
+		  				</p>
+					</div>
+				</div>
+			</div>
+			{{/data.moduleTOList}}
+		</div>
+	</div>
+
+</div>

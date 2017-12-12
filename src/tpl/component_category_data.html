@@ -1,0 +1,16 @@
+{{#dataList}}
+<tr>
+	<th>{{name}}</th>
+	<td>{{priorityText}}</td>
+	<td>{{availableText}}</td>
+	<td>
+		<button class="btn m-b-xs btn-sm btn-info btn-addon" data-toggle="modal" data-target="#myModal-edit" value="{{id}}:{{name}}:{{priority}}:{{available}}">
+					                  <i class="fa fa-edit mr10"></i>编辑
+					                </button>
+		<button class="btn m-b-xs btn-sm btn-danger btn-addon mr10" data-toggle="modal" data-target="#myModal-del" value="{{id}}:{{name}}">
+					                  <i class="fa fa-delicious mr10"></i>删除
+					                </button>
+		
+	</td>
+</tr>
+{{/dataList}}
