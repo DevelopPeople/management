@@ -37,6 +37,8 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','md5','mui'], functio
                     storage.id=data.dataList[0].id;
                     storage.userphone=data.dataList[0].mobile;
                     storage.password=data.dataList[0].password;
+                    storage.username=data.dataList[0].username;
+                    console.log(storage.username);
                     window.location.href = "main.html";
                 }else{
                 	mui.alert("没有权限访问页面")

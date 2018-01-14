@@ -69,7 +69,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 				});
 				$.each(data.dataList, function(index, item) {
 					// item.availableText = showArry[item.available];
-					item.role = userRole[item.role];
+					item.roleText = userRole[item.role];
 				});
 
 				mine.render("tpl/user_management_data.html", data).then(function(html) {
@@ -91,15 +91,16 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 						var value = $(this).val();
 						console.log(value);
 						value = value.split(':');
+						console.log(value);
 						editsaveId = value[0];
 						console.log(value[0]);
+						console.log(value[1]);
+						console.log(value[2]);
 						$('#edusername').val(value[1]);
 						// $('#edrelaname').val(value[2]);
 						$('#edmobile').val(value[2]);
-						// var edrole=value[3];
-						console.log(value[3])
-						if(value[3]== "") {
-							//									alert('不是空的');
+
+						if(value[3] !== "") {
 							$("#edrole option").siblings().removeAttr('selected');
 							$("#edrole option[value=" + value[3]+ "]").attr('selected', 'selected');
 						}
@@ -310,19 +311,19 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	$('#editSave').click(function() {
 		var role = $('#edrole').val();
 		role = parseInt(role);
-		console.log(role);
+		console.log('role'+role);
 		var username = $('#edusername').val();
-		console.log(username);
+		console.log('username'+username);
 		// var realname = $('#edrelaname').val();
 		var mobile = $('#edmobile').val();
-		console.log(mobile);
+		console.log('moblie'+mobile);
 		var password = $('#edpassword').val();
 		console.log(password)
 		var repassword = $('#edrepassword').val();
 		// var available = $('#edavailable').val();
 		var dataJson;
-		if(username != ''&& role != ''&& mobile != '') {
-			
+		if( username!== '' && role!=="" && mobile!=="") {
+			console.log('不为空')
 			
 			if(password !== '' || repassword !== '') {
 				if(password == repassword) {

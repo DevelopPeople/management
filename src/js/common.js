@@ -49,8 +49,8 @@ var require = {
 
 //var urlBase = "http://192.168.31.125:8080";
 //var urlBase = "http://192.168.31.125:8084/locker"
-var urlBase = "http://192.168.1.106:12345/school";
-// var urlBase = "http://dev.yezhubao.net:12345/material";
+// var urlBase = "http://192.168.1.106:12345/school";
+var urlBase = "http://www.rainrain.xin:12345/school";
 var size = 2;
 var page = 0;
 var pageSize = 10;
@@ -117,6 +117,7 @@ function advanceAndRetreat() {
 function showCurrentUser() {
 	$('.currentUser').text(window.localStorage.username);
 	$('.currentRole').text(window.localStorage.role);
+
 }
 //	退出操作
 function signOut() {
