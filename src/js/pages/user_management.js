@@ -43,7 +43,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
 	function getUserList(page) {
 		mine.showLoading();
-		var url = urlBase + '/user/searchall/' + page + '/' + pageSize;
+		var url = urlBase + '/user/search/' + page + '/' + pageSize;
 		mine.get(url).then(function(data) {
 			mine.closeLoading();
 			if(data.errCode == 0) {
@@ -92,17 +92,17 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 						console.log(value);
 						value = value.split(':');
 						editsaveId = value[0];
+						console.log(value[0]);
 						$('#edusername').val(value[1]);
-						$('#edrelaname').val(value[2]);
-						$('#edmobile').val(value[3]);
-						console.log(value[2]);
-						if(value[4] !== "") {
+						// $('#edrelaname').val(value[2]);
+						$('#edmobile').val(value[2]);
+						// var edrole=value[3];
+						console.log(value[3])
+						if(value[3]== "") {
 							//									alert('不是空的');
 							$("#edrole option").siblings().removeAttr('selected');
-							$("#edrole option[value=" + value[4] + "]").attr('selected', 'selected');
+							$("#edrole option[value=" + value[3]+ "]").attr('selected', 'selected');
 						}
-						$("#edavailable option").siblings().removeAttr('selected');
-						$("#edavailable option[value=" + value[5] + "]").attr('selected', 'selected');
 
 					});
 
@@ -204,6 +204,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	$('#addUser').click(function() {
 		var role = $('#role').val();
 		role = parseInt(role);
+		console.log(role);
 		var username = $('#username').val();
 		// var realname = $('#relaname').val();
 		var mobile = $('#mobile').val();
@@ -264,7 +265,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	function delUser(id) {
 		mine.showLoading();
 		var url = urlBase + '/user/delete/' + id;
-		mine.get(url).then(function(data) {
+		mine.del(url).then(function(data) {
 			mine.closeLoading();
 			console.log(JSON.stringify(data));
 			if(data.errCode == 0) {
@@ -309,14 +310,18 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	$('#editSave').click(function() {
 		var role = $('#edrole').val();
 		role = parseInt(role);
+		console.log(role);
 		var username = $('#edusername').val();
-		var realname = $('#edrelaname').val();
+		console.log(username);
+		// var realname = $('#edrelaname').val();
 		var mobile = $('#edmobile').val();
+		console.log(mobile);
 		var password = $('#edpassword').val();
+		console.log(password)
 		var repassword = $('#edrepassword').val();
-		var available = $('#edavailable').val();
+		// var available = $('#edavailable').val();
 		var dataJson;
-		if(username != '' && relaname != '' && mobile != '') {
+		if(username != ''&& role != ''&& mobile != '') {
 			
 			
 			if(password !== '' || repassword !== '') {
@@ -324,13 +329,13 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 					password = md5(password);
 					
 					dataJson = {
-						id: editsaveId,
+						id:editsaveId,
 						username: username,
-						realname: realname,
+						// realname: realname,
 						mobile: mobile,
 						role: role,
 						password: password,
-						available: available
+						// available: available
 
 					}
 				} else {
@@ -340,10 +345,10 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 				dataJson = {
 					id: editsaveId,
 					username: username,
-					realname: realname,
+					// realname: realname,
 					mobile: mobile,
 					role: role,
-					available: available
+					// available: available
 
 				}
 			}
@@ -352,19 +357,24 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 				console.log(JSON.stringify(dataJson));
 				updateUser(dataJson)
 			}
+
 				
 
 		} else {
-			mui.alert('前四项不能为空')
+			mui.alert("前三项不能为空")	;
+
 		}
 	});
 
 	function updateUser(dataJson) {
 		mine.showLoading();
-		var url = urlBase + '/user';
+		var url = urlBase + '/user/edit';
 		mine.put(url, dataJson).then(function(data) {
+            // console.log(JSON.stringify(data));
+			console.log(data);
 			mine.closeLoading();
 			if(data.errCode == 0) {
+                // console.log(JSON.stringify(data));
 				mui.alert('修改成功');
 				window.location.reload();
 			} else {
