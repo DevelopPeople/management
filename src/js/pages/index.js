@@ -32,7 +32,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','md5','mui'], functio
 	            // storage.username = data.data.username;
 	           	// storage.realname = data.data.realname;
 	           	// storage.role = data.data.role;
-				if(data.dataList[0].role ==2){
+				if(data.dataList[0].role == 1 || data.dataList[0].role == 2){
                     var storage =window.localStorage;
                     storage.id=data.dataList[0].id;
                     storage.userphone=data.dataList[0].mobile;

@@ -191,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									<a href="user_management.html"><i class="fa fa-circle-o"></i>用户管理</a>
 								</li>
 								<li class="active">
-									<a href="user_challenge.html"><i class="fa fa-circle-o"></i>用户组装</a>
+									<a href="user_challenge.html"><i class="fa fa-circle-o"></i>用户查询</a>
 								</li>
 							</ul>
 						</li>
@@ -216,14 +216,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h1>
-				        	用户组装
+				        	用户查询
 				        <small>User Assembly</small>
      				</h1>
 					<ol class="breadcrumb">
 						<li>
 							<a href="#"><i class="fa fa-dashboard"></i> 当前</a>
 						</li>
-						<li class="active">用户组装</li>
+						<li class="active">用户查询</li>
 					</ol>
 				</section>
 
@@ -257,62 +257,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
         -------------------------->
 					<div class="bg-white">
 
-						<form class="navbar-form navbar-left">
+						<form class="navbar-form navbar-left" style="width: 100%;">
 							<!--<div class="col-sm-5">-->
 							<label>状态查询：</label>
 							<select name="status" id="status" class="form-control">
-								<option value="0">所有</option>
-								<option value="1">已完成</option>
-								<option value="2">已取消</option>
+								<option value="0">学生</option>
+								<option value="1">管理员</option>
+								<option value="2">超级管理员</option>
 							</select>
 							<!--</div>-->
-							<!--<div class="col-sm-2">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Search">
+							<div class="pull-right">
+								<div class="form-group" style="display: inline-block;">
+									<input type="text" class="form-control" placeholder="搜索用户名">
 								</div>
 								<button type="button" class="btn btn-default">查找</button>
-							</div>-->
-
+							</div>
 						</form>
+						
 
 						<table class="table table-striped bg-white">
 							<thead>
 								<tr>
 									<th>用户名</th>
-									<!--<th>真实姓名</th>-->
-									<!--<th>电话</th>-->
-									<!--<th>角色</th>-->
-									<th>组装项目</th>
-									<th>组装结果</th>
-									<th>开始时间</th>
-									<th>结束时间</th>
-									<!--<th>完成数量</th>-->
-									<!--<th>剩余数量</th>-->
+									<th>手机号</th>
+									<th>角色</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody class="task-list">
 
-								<!--<tr>
-									<th>{{name}}</th>
-									<td>{{remaining}}</td>
-									<td>{{productCategoryTO.name}}</td>
-									<td>{{available}}</td>
-									<td>{{viewNum}}</td>
-									<td>{{completeNum}}</td>
-
-									<td>
-										<button class="btn m-b-xs btn-sm btn-danger btn-addon mr10" data-toggle="modal" data-target="#myModal-del">
-					                  <i class="fa fa-delicious mr10"></i>删除
-					                </button>
-										<button class="btn m-b-xs btn-sm btn-info btn-addon" data-toggle="modal" data-target="#myModal-edit">
-					                  <i class="fa fa-edit mr10"></i>编辑
-					                </button>
-									</td>
-								</tr>-->
 							</tbody>
 						</table>
-						<!--<button type="button" class="btn btn-success ml20" data-toggle="modal" data-target="#myModal">新增用户组装</button>-->
+						<!--<button type="button" class="btn btn-success ml20" data-toggle="modal" data-target="#myModal">新增用户</button>-->
 
 						<div class="text-center">
 							<ul class="pagination" id="page1"></ul>
@@ -323,6 +299,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								<button type="button" class="button">确定</button>
 							</div>
 						</div>
+
 
 					</div>
 

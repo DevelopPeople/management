@@ -5,7 +5,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	var editsaveId = '';
 	var status = 0;
 	pageSize = 10;
-	getChallengeList(status, page);
+//	getChallengeList(status, page);
 	var allCategory = [];
 	var showArry = {
 		'true': '是',
