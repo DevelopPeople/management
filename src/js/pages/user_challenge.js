@@ -5,13 +5,13 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	var editsaveId = '';
 	var status = 0;
 	pageSize = 10;
-//	getChallengeList(status, page);
+	getUserRoleList(status, 0 ,true);
 	var allCategory = [];
 	var showArry = {
 		'true': '是',
 		'false': '否'
 	}
-	var userRole = ['普通用户', '管理员'];
+	var userRole = ['普通用户', '管理员','超级管理员'];
 
 	var statusArry = ['完成','取消'];
 	//			var priorityArry = ['低','中低','中','中高','高'];
@@ -45,11 +45,19 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 		
 	})
 
-	function getChallengeList(status, page) {
+	function getUserRoleList(status, page, search) {
 		mine.showLoading();
-		var url = urlBase + '/challenge/list/e10adc3949ba59abbe56e057f20f8830/' + status + '/' + page + '/' + pageSize;
+		var url
+		if(search){
+			url = urlBase + '/user/search/role/' + status + '/' + page + '/' + pageSize;
+		}else{
+			url = urlBase + '/user/search/name/' + status + '/' + page + '/' + pageSize;
+		}
+		
+		console.log(url)
 		mine.get(url).then(function(data) {
 			mine.closeLoading();
+			console.log(data);
 			if(data.errCode == 0) {
 				console.log(data)
 				totalRecords = data.totalRecords;
@@ -70,24 +78,12 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 					}
 				});
 				$.each(data.dataList, function(index, item) {
-					item.status = statusArry[item.status-1];
-					item.roleText = userRole[item.userTO.role - 1];
-					
-					if(item.startTime == undefined){
-						item.startTime = '';
-					}else{
-						item.startTime = formatDate(item.startTime);
-					}
-					if(item.endTime == undefined){
-						item.endTime = '';
-					}else{
-						item.endTime = formatDate(item.endTime);
-					}
+					item.roleText = userRole[item.role];
 					
 					
 				});
 
-				mine.render("tpl/user_challenge_data.html", data).then(function(html) {
+				mine.render("tpl/user_management_data.html", data).then(function(html) {
 					$('.task-list').html(html);
 					//	删除操作
 					$('.task-list .btn-danger').click(function() {
@@ -97,25 +93,35 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 						var delId = value[0];
 						var delName = value[1];
 						$('#delname').text(delName);
-						$('#objectname').text(value[2]);
 						$('#delSubmit').attr('delid', delId);
 					});
-					
-					// 查看操作
-// {{userTO.username}}:{{userTO.realname}}:{{userTO.mobile}}:{{productTO.name}}:{{status}}:{{startTime}}:{{endTime}}:{{productTO.completeNum}}:{{productTO.remaining}}
-					var showArry = ["usernam","realname","roleText","challenge","result","starttime","endtime","completeNum","remaining"];
-					$('.task-list .btn-primary').click(function(){
+					//	编辑操作
+					//							{{id}}:{{name}}:{{remaining}}:{{moduleCategoryTO.id}}:{{moduleCategoryTO.name}}:{{priority}}:{{coverImage}}
+					//							e10adc3949ba59abbe56e057f20f8830:aaa:李四:13312344321:1:true
+					$('.task-list .btn-info').click(function() {
 						var value = $(this).val();
 						console.log(value);
-						value = value.split('!');
+						value = value.split(':');
 						console.log(value);
-						$('#usernam').text(value[0]);
-						insertInputValue(showArry,value);
-						
-					})
-					
+						editsaveId = value[0];
+						console.log(value[0]);
+						console.log(value[1]);
+						console.log(value[2]);
+						$('#edusername').val(value[1]);
+						// $('#edrelaname').val(value[2]);
+						$('#edmobile').val(value[2]);
+
+						if(value[3] !== "") {
+							$("#edrole option").siblings().removeAttr('selected');
+							$("#edrole option[value=" + value[3]+ "]").attr('selected', 'selected');
+						}
+
+					});
+
 
 				});
+			}else{
+				mui.alert(data.errMsg)
 			}
 		}).fail(function(status) {
 			statusHandler(status);
@@ -183,7 +189,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
 	function delUser(id) {
 		mine.showLoading();
-		var url = urlBase + '/challenge/' + id;
+		var url = urlBase + '/user/delete/' + id;
 		mine.del(url).then(function(data) {
 			mine.closeLoading();
 			console.log(JSON.stringify(data));
@@ -198,61 +204,77 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 		})
 	}
 
-	//	关闭模态框清input数据---查看模态框
-	//	$('#myModal-edit .close').click(function(){
-	//		var arry = ['edpname','edpnum','edpimg']
-	//		$('.edupload-img').attr('src','');
-	//		clearInputValue(arry);
-	//	});
-	//	
-	//	$('#myModal-edit .btn-default').click(function(){
-	//		var arry = ['edpname','edpnum','edpimg']
-	//		$('.edupload-img').attr('src','');
-	//		clearInputValue(arry);
-	//	});
-	//	
+
 
 	//	编辑操作
 	$('#editSave').click(function() {
 		var role = $('#edrole').val();
 		role = parseInt(role);
+		console.log('role'+role);
 		var username = $('#edusername').val();
-		var realname = $('#edrelaname').val();
+		console.log('username'+username);
+		// var realname = $('#edrelaname').val();
 		var mobile = $('#edmobile').val();
+		console.log('moblie'+mobile);
 		var password = $('#edpassword').val();
+		console.log(password)
 		var repassword = $('#edrepassword').val();
-		var available = $('#edavailable').val();
-		if(username != '' && relaname != '' && mobile != '' && password != '' && repassword != '') {
-			if(password == repassword) {
-				password = md5(password);
-				console.log(password);
-				var dataJson = {
+		// var available = $('#edavailable').val();
+		var dataJson;
+		if( username!== '' && role!=="" && mobile!=="") {
+			console.log('不为空')
+			
+			if(password !== '' || repassword !== '') {
+				if(password == repassword) {
+					password = md5(password);
+					
+					dataJson = {
+						id:editsaveId,
+						username: username,
+						// realname: realname,
+						mobile: mobile,
+						role: role,
+						password: password,
+						// available: available
+
+					}
+				} else {
+					mui.alert('密码不一致，请重新输入密码');
+				}
+			} else {
+				dataJson = {
 					id: editsaveId,
 					username: username,
-					realname: realname,
+					// realname: realname,
 					mobile: mobile,
 					role: role,
-					password: password,
-					available: available
+					// available: available
 
 				}
+			}
+			
+			if(checkMobile(mobile)){
 				console.log(JSON.stringify(dataJson));
 				updateUser(dataJson)
-
-			} else {
-				mui.alert('密码不一致，请重新输入密码')
 			}
+
+				
+
 		} else {
-			mui.alert('新增用户所有属性为必填项')
+			mui.alert("前三项不能为空")	;
+
 		}
 	});
 
 	function updateUser(dataJson) {
 		mine.showLoading();
-		var url = urlBase + '/user';
+		var url = urlBase + '/user/edit';
 		mine.put(url, dataJson).then(function(data) {
+            // console.log(JSON.stringify(data));
+			console.log(data);
 			mine.closeLoading();
 			if(data.errCode == 0) {
+                // console.log(JSON.stringify(data));
 				mui.alert('修改成功');
 				window.location.reload();
 			} else {
@@ -282,7 +304,19 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 	$('#status').change(function() {
 		status = $(this).children('option:selected').val();
 		$('.task-list').html("");
-		getChallengeList(status, page);
+		getUserRoleList(status, 0,true);
 	})
+	
+	$('#findUserName').click(function(){
+		var status = $('#searchName').val();
+		if(!status){
+			mui.alert('搜索用户名不能为空');
+		}else{
+			getUserRoleList(status, 0, false)
+		}
+		
+		
+	})
+	
 
 });

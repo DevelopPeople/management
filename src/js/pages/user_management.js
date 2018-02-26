@@ -107,17 +107,10 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
 					});
 
-					//	查看操作
-					//							$('.task-list .btn-primary').click(function(){
-					//								var id = $(this).attr('value');
-					////								alert(id);
-					//								id = encodeURIComponent(id);
-					//								window.location.href = "../../pages/product/product_management_show.html?" + id;
-					//							});
 
 				});
-			}else if(data.errCode ==1){
-				mui.alert("没有更多数据了");
+			}else{
+				mui.alert(data.errMsg);
 			}
 		}).fail(function(status) {
 			statusHandler(status);

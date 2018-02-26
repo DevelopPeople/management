@@ -48,6 +48,7 @@ var require = {
 };
 
 var urlBase = "http://192.168.31.13:12345/school";
+//var urlBase = "http://192.168.1.108:12345/school";
 //var urlBase = "http://www.rainrain.xin:12345/school";
 var size = 2;
 var page = 0;
