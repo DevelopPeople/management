@@ -4,7 +4,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
     var totalPage = 1;
     var editsaveId = '';
     pageSize = 10;
-    getUserList(page);
+    getPhoneList(page);
     var allCategory = [];
     var showArry = {
         'true': '正常',
@@ -41,9 +41,9 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
     })
 
-    function getUserList(page) {
+    function getPhoneList(page) {
         mine.showLoading();
-        var url = urlBase + '/user/search/' + page + '/' + pageSize;
+        var url = urlBase + '/phone/search/' + page + '/' + pageSize;
         mine.get(url).then(function(data) {
             mine.closeLoading();
             if(data.errCode == 0) {
@@ -64,13 +64,13 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
                     startnum: startnum, //指定页码
                     elem: $('#page1'), //指定的元素
                     callback: function(n) { //回调函数
-                        getUserList(n - 1);
+                        getPhoneList(n - 1);
                     }
                 });
-                $.each(data.dataList, function(index, item) {
-                    // item.availableText = showArry[item.available];
-                    item.roleText = userRole[item.role];
-                });
+                // $.each(data.dataList, function(index, item) {
+                //     // item.availableText = showArry[item.available];
+                //     item.roleText = userRole[item.role];
+                // });
 
                 mine.render("tpl/phoneList_management.html", data).then(function(html) {
                     $('.task-list').html(html);
@@ -79,6 +79,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
                         var value = $(this).val();
                         console.log(value);
                         value = value.split(':');
+                        console.log(value);
                         var delId = value[0];
                         var delName = value[1];
                         $('#delname').text(delName);
@@ -96,14 +97,14 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
                         console.log(value[0]);
                         console.log(value[1]);
                         console.log(value[2]);
-                        $('#edusername').val(value[1]);
+                        $('#contact_bm').val(value[1]);
                         // $('#edrelaname').val(value[2]);
                         $('#edmobile').val(value[2]);
-
-                        if(value[3] !== "") {
-                            $("#edrole option").siblings().removeAttr('selected');
-                            $("#edrole option[value=" + value[3]+ "]").attr('selected', 'selected');
-                        }
+                        $('#discribe').val(value[3]);
+                        // if(value[3] !== "") {
+                        //     $("#edrole option").siblings().removeAttr('selected');
+                        //     $("#edrole option[value=" + value[3]+ "]").attr('selected', 'selected');
+                        // }
 
                     });
 
@@ -254,7 +255,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
     function delUser(id) {
         mine.showLoading();
-        var url = urlBase + '/user/delete/' + id;
+        var url = urlBase + '/phone/delete/' + id;
         mine.del(url).then(function(data) {
             mine.closeLoading();
             console.log(JSON.stringify(data));
@@ -298,67 +299,43 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
 
     //	编辑操作
     $('#editSave').click(function() {
-        var role = $('#edrole').val();
-        role = parseInt(role);
-        console.log('role'+role);
-        var username = $('#edusername').val();
-        console.log('username'+username);
+        // var role = $('#edrole').val();
+        // role = parseInt(role);
+        // console.log('role'+role);
+        // var username = $('#edusername').val();
+        // console.log('username'+username);
         // var realname = $('#edrelaname').val();
+        // 手机号
         var mobile = $('#edmobile').val();
-        console.log('moblie'+mobile);
-        var password = $('#edpassword').val();
-        console.log(password)
-        var repassword = $('#edrepassword').val();
+        // console.log('moblie'+mobile);
+        // 联系部门
+        var contacts = $('#contact_bm').val();
+        console.log(contacts);
+        // 描述
+        var memo = $('#discribe').val();
+        console.log(memo);
         // var available = $('#edavailable').val();
-        var dataJson;
-        if( username!== '' && role!=="" && mobile!=="") {
+        if( mobile!== '' && contacts !=="" && memo!=="") {
             console.log('不为空')
+             var   dataJson = {
+                id: editsaveId,
+                contacts: contacts,
+                // realname: realname,
+                mobile: mobile,
+                memo: memo,
 
-            if(password !== '' || repassword !== '') {
-                if(password == repassword) {
-                    password = md5(password);
 
-                    dataJson = {
-                        id:editsaveId,
-                        username: username,
-                        // realname: realname,
-                        mobile: mobile,
-                        role: role,
-                        password: password,
-                        // available: available
-
-                    }
-                } else {
-                    mui.alert('密码不一致，请重新输入密码');
-                }
-            } else {
-                dataJson = {
-                    id: editsaveId,
-                    username: username,
-                    // realname: realname,
-                    mobile: mobile,
-                    role: role,
-                    // available: available
-
-                }
             }
-
-            if(checkMobile(mobile)){
-                console.log(JSON.stringify(dataJson));
-                updateUser(dataJson)
-            }
-
-
-
+            updateUser(dataJson);
         } else {
-            mui.alert("前三项不能为空")	;
+            mui.alert("所有属性都必须填写")	;
 
         }
     });
 
     function updateUser(dataJson) {
         mine.showLoading();
-        var url = urlBase + '/user/edit';
+        var url = urlBase + '/phone/edit';
         mine.put(url, dataJson).then(function(data) {
             // console.log(JSON.stringify(data));
             console.log(data);

@@ -526,7 +526,7 @@ Launch demo modal
                 <h4 class="modal-title" id="myModalLabel-del">删除提示</h4>
             </div>
             <div class="modal-body">
-                你确定删除<b id="delname"></b>用户
+                你确定删除<b id="delname"></b>这个电话吗
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -542,29 +542,18 @@ Launch demo modal
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel-edit">编辑用户</h4>
+                <h4 class="modal-title" id="myModalLabel-edit">编辑电话管理</h4>
             </div>
             <div class="modal-body">
                 <div class="wrapper-md">
                     <div class="panel panel-default">
-                        <div class="panel-heading" id="staff_title">编辑用户</div>
+                        <div class="panel-heading" id="staff_title">编辑电话</div>
                         <div class="panel-body">
                             <form class="form-horizontal" onsubmit="return false;">
-
                                 <div class="form-group">
-                                    <label for="edrole" class="col-sm-4 control-label">角色</label>
+                                    <label for="contact_bm" class="col-sm-4 control-label">联系部门</label>
                                     <div class="col-sm-5">
-                                        <select name="edrole" id="edrole" class="form-control">
-                                            <option value="0">普通用户</option>
-                                            <option value="1">管理员</option>
-                                            <option value="2">超级管理员</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edusername" class="col-sm-4 control-label">用户名</label>
-                                    <div class="col-sm-5">
-                                        <input id="edusername" type="text" class="form-control" placeholder="请输入用户名" value="" id="">
+                                        <input id="contact_bm" type="text" class="form-control" placeholder="" value="">
                                     </div>
                                 </div>
                                 <!--<div class="form-group">-->
@@ -579,23 +568,23 @@ Launch demo modal
                                 <div class="form-group">
                                     <label for="edmobile" class="col-sm-4 control-label">手机号</label>
                                     <div class="col-sm-5">
-                                        <input id="edmobile" type="tel" maxlength="11" class="form-control" placeholder="请输入联系电话" value="" id="">
+                                        <input id="edmobile" type="tel" maxlength="11" class="form-control" placeholder="请输入联系电话" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="edpassword" class="col-sm-4 control-label">密码</label>
+                                    <label for="discribe" class="col-sm-4 control-label">描述</label>
                                     <div class="col-sm-5">
-                                        <input id="edpassword" type="password" class="form-control" placeholder="请输入密码" value="" id="">
+                                        <input id="discribe" type="text" class="form-control" placeholder="" value="">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="edrepassword" class="col-sm-4 control-label">确认密码</label>
-                                    <div class="col-sm-5">
-                                        <input id="edrepassword" type="password" class="form-control" placeholder="请确认密码" value="" id="">
-                                    </div>
-                                </div>
+                                <!--<div class="form-group">-->
+                                    <!--<label for="edrepassword" class="col-sm-4 control-label">确认密码</label>-->
+                                    <!--<div class="col-sm-5">-->
+                                        <!--<input id="edrepassword" type="password" class="form-control" placeholder="请确认密码" value="" id="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
 
                                 <!--<div class="form-group">-->
                                 <!--<label for="edavailable" class="col-sm-4 control-label">用户状态</label>-->
