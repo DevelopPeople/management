@@ -48,8 +48,8 @@ var require = {
 };
 
 // var urlBase = "http://192.168.31.13:12345/school";
-var urlBase = "http://192.168.1.100:12345/school";
-//var urlBase = "http://www.rainrain.xin:12345/school";
+//var urlBase = "http://192.168.1.100:12345/school";
+var urlBase = "http://www.rainrain.xin:12345/school";
 var size = 2;
 var page = 0;
 var pageSize = 10;
@@ -70,6 +70,18 @@ function checkMobile(mobile) {
     } else {
         return true;
     }
+}
+
+// 时区转时间戳
+function GMTToStr(time){
+    var date = new Date(time)
+    var Str=date.getFullYear() + '-' +
+    (date.getMonth() + 1) + '-' + 
+    date.getDate() + ' ' + 
+    date.getHours() + ':' + 
+    date.getMinutes() + ':' + 
+    date.getSeconds()
+    return Str
 }
 
 //时间戳转时间
