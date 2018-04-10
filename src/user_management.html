@@ -11,14 +11,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<title>后台管理</title>
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />-->
 		<!-- Font Awesome -->
-		<!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<!--<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" />-->
 		<!-- Ionicons -->
-		<!--<link rel="stylesheet" href="css/ionicons.min.css">-->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.0/css/ionicons.min.css" />
+		<link rel="stylesheet" href="css/ionicons.min.css">
+		<!--<link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.0/css/ionicons.min.css" />-->
 		<!-- Theme style -->
 		<link rel="stylesheet" href="css/AdminLTE.min.css">
 		<link rel="stylesheet" href="css/skin-blue.min.css">
@@ -162,41 +162,62 @@ desired effect
 					<ul class="sidebar-menu" data-widget="tree">
 						<li class="header">功能模块</li>
 
+						<li class="treeview menu-open">
+							<a href="#">
+								<i class="fa fa-dashboard"></i> <span>校园特卖</span>
+								<span class="pull-right-container">
+				              <i class="fa fa-angle-left pull-right"></i>
+				            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li class="active">
+									<a href="main.html"><i class="fa fa-circle-o"></i>特卖动态</a>
+								</li>
+							</ul>
+						</li>
+
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-dashboard"></i> <span>产品管理</span>
+								<i class="fa fa-dashboard"></i> <span>校园活动</span>
 								<span class="pull-right-container">
 				              <i class="fa fa-angle-left pull-right"></i>
 				            </span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="main.html"><i class="fa fa-circle-o"></i>分类管理</a>
+									<a href="sell_management.html"><i class="fa fa-circle-o"></i>活动列表</a>
 								</li>
-								<li>
-									<a href="product_management.html"><i class="fa fa-circle-o"></i>产品管理</a>
-								</li>
-								<!--<li><a href=" pages/product/detail_management.html"><i class="fa fa-circle-o"></i>明细管理</a></li>-->
 							</ul>
 						</li>
-
 						<li class="treeview">
 							<a href="#">
-								<i class="fa fa-dashboard"></i> <span>组件管理</span>
+								<i class="fa fa-dashboard"></i> <span>学习交流</span>
+								<span class="pull-right-container">
+				              <i class="fa fa-angle-left pull-right"></i>
+				            </span>
+							</a>
+							<ul class="treeview-menu">
+								<!--<li>-->
+								<!--<a href="component_category.html"><i class="fa fa-circle-o"></i>分类管理</a>-->
+								<!--</li>-->
+								<li>
+									<a href="study_msg.html"><i class="fa fa-circle-o"></i>交流信息</a>
+								</li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-dashboard"></i> <span>勤工俭学</span>
 								<span class="pull-right-container">
 				              <i class="fa fa-angle-left pull-right"></i>
 				            </span>
 							</a>
 							<ul class="treeview-menu">
 								<li>
-									<a href="component_category.html"><i class="fa fa-circle-o"></i>分类管理</a>
-								</li>
-								<li>
-									<a href="component_management.html"><i class="fa fa-circle-o"></i>组件管理</a>
+									<a href="work.html"><i class="fa fa-circle-o"></i>招聘信息</a>
 								</li>
 							</ul>
 						</li>
-
 						<li class="treeview menu-open">
 							<a href="#">
 								<i class="fa fa-dashboard"></i> <span>用户管理</span>

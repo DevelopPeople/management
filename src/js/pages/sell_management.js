@@ -11,7 +11,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 		'false': '否'
 	}
 	var priorityArry = ['低', '中低', '中', '中高', '高'];
-	getCompontentCategory();
+	// getCompontentCategory();
 
 	//	显示当前用户
 	showCurrentUser();
@@ -43,7 +43,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 
 	function getComponentList(page) {
 		mine.showLoading();
-		var url = urlBase + '/module/list/' + page + '/' + pageSize;
+		var url = urlBase + '/activity/search/' + page + '/' + pageSize;
 		mine.get(url).then(function(data) {
 			mine.closeLoading();
 			if(data.errCode == 0) {
@@ -66,11 +66,11 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 					}
 				});
 				$.each(data.dataList, function(index, item) {
-					item.priorityText = priorityArry[item.priority - 1];
-				
+					// item.priorityText = priorityArry[item.priority - 1];
+					item.newImage ='data:image/jpeg;base64,'+item.image;
 				});
 
-				mine.render("tpl/component_management_data.html", data).then(function(html) {
+				mine.render("tpl/activity_management_data.html", data).then(function(html) {
 					$('.task-list').html(html);
 					//	删除操作
 					$('.task-list .btn-danger').click(function() {
@@ -85,26 +85,26 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 					//	编辑操作
 					//							{{id}}:{{name}}:{{remaining}}:{{moduleCategoryTO.id}}:{{moduleCategoryTO.name}}:{{priority}}:{{coverImage}}
 					//e10adc3949ba59abbe56e057f20f8831:290:99:cfcd208495d565ef66e7dff9f98764d3:摄像头模组:1:
-					$('.task-list .btn-info').click(function() {
-						var value = $(this).val();
-						console.log(value);
-						value = value.split(':');
-						editsaveId = value[0];
-						$('#edpname').val(value[1]);
-						$('#edpnum').val(value[2]);
-						$('#edmemo').val(value[6]);
-						console.log(value[2]);
-						if(value[3] !== "") {
-							//									alert('不是空的');
-							$("#edpcategory option").siblings().removeAttr('selected');
-							$("#edpcategory option[value=" + value[3] + "]").attr('selected', 'selected');
-						}
-						$("#edPriority option[value=" + value[5] + "]").attr('selected', 'selected');
-
-						
-						$(".edupload-img").attr('src', 'data:image/jpeg;base64,'+value[7]);
-						
-					});
+					// $('.task-list .btn-info').click(function() {
+					// 	var value = $(this).val();
+					// 	console.log(value);
+					// 	value = value.split(':');
+					// 	editsaveId = value[0];
+					// 	$('#edpname').val(value[1]);
+					// 	$('#edpnum').val(value[2]);
+					// 	$('#edmemo').val(value[6]);
+					// 	console.log(value[2]);
+					// 	if(value[3] !== "") {
+					// 		//									alert('不是空的');
+					// 		$("#edpcategory option").siblings().removeAttr('selected');
+					// 		$("#edpcategory option[value=" + value[3] + "]").attr('selected', 'selected');
+					// 	}
+					// 	$("#edPriority option[value=" + value[5] + "]").attr('selected', 'selected');
+                    //
+					//
+					// 	$(".edupload-img").attr('src', 'data:image/jpeg;base64,'+value[7]);
+					//
+					// });
 
 		
 
@@ -174,7 +174,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 	//	 获得产品的分类
 	function getCompontentCategory() {
 		mine.showLoading();
-		var url = urlBase + '/module_category/list';
+		var url = urlBase + '/campusSale/search';
 		console.log(url)
 		mine.get(url).then(function(data) {
 			mine.closeLoading();
@@ -194,39 +194,43 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 		});
 	}
 
-	//	增加产品
+	//	新增动态
 	$('#addProduct').click(function() {
-		var pname = $('#pname').val();
-		var pnum = $('#pnum').val();
-		pnum = parseInt(pnum);
-		var pcategory = $('#pcategory').val();
-		var priority = $('#addPriority').val();
+		// var pname = $('#pname').val();
+		// var pnum = $('#pnum').val();
+		// pnum = parseInt(pnum);
+		// var pcategory = $('#pcategory').val();
+		// var priority = $('#addPriority').val();
 		var pimg = $('.upload-img').attr('src');
 		var memo = $('#memo').val();
-		console.log(pname);
-		console.log(pnum);
+		var tit=$("#title").val();
+		var id=window.localStorage.id;
+		// console.log(pname);
+		// console.log(pnum);
 		console.log(pimg);
-		if(pname != '' && pnum != '' && pimg !== '') {
+		if(memo != '' && pimg !== ''&& tit !='') {
 			pimg = pimg.split(',');
 			var dataJson = {
-				name: pname,
-				remaining: pnum,
-				moduleCategoryId: pcategory,
-				priority: priority,
+				// name: pname,
+				// remaining: pnum,
+				// moduleCategoryId: pcategory,
+				// priority: priority,
+				userId:id,
 				image: pimg[1],
-				memo: memo
+				content: memo,
+				title:tit
 
 			}
 			console.log(JSON.stringify(dataJson));
 			addComponent(dataJson)
 		} else {
-			mui.alert('组件名称、数量、图片不能为空')
+			mui.alert('新增活动 标题、内容、上传图片、不能为空')
 		}
 	})
 
 	function addComponent(dataJson) {
 		mine.showLoading();
-		var url = urlBase + '/module';
+		var url = urlBase + '/activity/add';
 		mine.post(url, dataJson).then(function(data) {
 			mine.closeLoading();
 			if(data.errCode == 0) {
@@ -249,15 +253,13 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 
 	function delComponent(id) {
 		mine.showLoading();
-		var url = urlBase + '/module/' + id;
+		var url = urlBase + '/activity/delete/' + id;
 		mine.del(url).then(function(data) {
 			mine.closeLoading();
 			console.log(JSON.stringify(data));
 			if(data.errCode == 0) {
 				mui.alert('刪除成功');
 				window.location.reload();
-			} else if(data.errCode == 5) {
-				mui.alert('当前组件已被应用，不能删除');
 			} else{
 				mui.alert('删除失败');
 			}

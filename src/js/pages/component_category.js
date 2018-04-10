@@ -8,7 +8,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 	var editsaveId;
 	
 	getBodyHeight();
-	getCompontentCategory();
+	// getCompontentCategory();
 	
 	//	显示当前用户
 	showCurrentUser();

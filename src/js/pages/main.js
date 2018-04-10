@@ -1,4 +1,4 @@
-define(['jquery', 'adminlte', 'pager', 'mine'], function($, A, pager, mine) {
+define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine,mui) {
 	advanceAndRetreat();
 	var priorityArry = ['低', '中低', '中', '中高', '高'];
 	var showArry = {
@@ -9,7 +9,7 @@ define(['jquery', 'adminlte', 'pager', 'mine'], function($, A, pager, mine) {
 	var editsaveId;
 	var oldData = [];
 	getBodyHeight();
-	// getProductCategory();
+	getProductCategory();
 	
 	
 //	显示当前用户
@@ -45,48 +45,24 @@ define(['jquery', 'adminlte', 'pager', 'mine'], function($, A, pager, mine) {
 	});
 	
 	function getProductCategory() {
-		mine.showLoading();
-		var url = urlBase + '/product_category/list';
+		// mine.showLoading();
+		var url = urlBase + '/campusSale/search/'+page+'/'+pageSize;
 		console.log(url)
 		mine.get(url).then(function(data) {
-			mine.closeLoading();
+			// mine.closeLoading();
 			if(data.errCode == 0) {
 				console.log(JSON.stringify(data))
 				oldData = data.dataList;
-				$.each(data.dataList, function(index, item) {
-					if(item.pid == undefined || item.pid == '') {
-						item.parent = '无';
-						var newdata = {
-							id: item.id,
-							name: item.name
-						}
-//						console.log(JSON.stringify(newdata))
-						pidArry.push(newdata);
-					} else {
-						var newpid = item.pid;
-						var newparent;
-						$.each(data.dataList, function(index, item) {
-//							console.log(item.id)
-							if(newpid == item.id) {
-								newparent = item.name;
-								return;
-							}
-						});
-						item.parent = newparent;
-					}
-//					console.log(typeof item.pid);
-					item.priorityText = priorityArry[item.priority - 1];
-					item.availableText = showArry[item.available];
-
-				});
-
-				$.each(pidArry, function(index, item) {
-					var list = '<option value="' + item.id + '">' + item.name + '</option>';
-					$("#edpid").append(list);
-					$("#addPid").append(list);
-
-				});
-				console.log(pidArry);
+				console.log(data.dataList);
+				$.each(data.dataList,function(index,item){
+					console.log(item.image);
+					var images =item.image;
+					item.images=images.split('|');
+					$.each(item.images,function(index,item){
+						item = item +'.jpg'
+						console.log(item);
+					})
+				})
 				mine.render("tpl/product_category_data.html", data).then(function(html) {
 					$('.task-list').html(html);
 
@@ -135,7 +111,7 @@ define(['jquery', 'adminlte', 'pager', 'mine'], function($, A, pager, mine) {
 
 	function delProductCategory(id) {
 		mine.showLoading();
-		var url = urlBase + '/product_category/' + id;
+		var url = urlBase + '/campusSale/delete/' + id;
 		mine.del(url).then(function(data) {
 			mine.closeLoading();
 			console.log(JSON.stringify(data));
