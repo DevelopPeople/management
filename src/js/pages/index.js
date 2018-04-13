@@ -1,6 +1,6 @@
 define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','md5','mui'], function($, B, A, pager, mine, md5,mui) {
 	var userRole = ['普通用户','管理员'];
-    advanceAndRetreat();
+//  advanceAndRetreat();
 	$('#login').click(function() {
 		var userphone = $('#user').val();
 		var userpass = $('#userpass').val();
