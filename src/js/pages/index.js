@@ -38,6 +38,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','md5','mui'], functio
                     storage.userphone=data.dataList[0].mobile;
                     storage.password=data.dataList[0].password;
                     storage.username=data.dataList[0].username;
+                    storage.avatar = data.dataList[0].avatar;
                     console.log(storage.username);
                     window.location.href = "main.html";
                 }else{

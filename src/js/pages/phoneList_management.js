@@ -15,7 +15,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine', 'md5','mui'], functi
     //			getCompontentCategory();
     //	显示当前用户
     showCurrentUser();
-
+	setLogo()
     //	退出操作
     $('#out').click(function() {
         signOut();

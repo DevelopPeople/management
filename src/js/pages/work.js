@@ -12,7 +12,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
     }
     var priorityArry = ['低', '中低', '中', '中高', '高'];
     // getCompontentCategory();
-
+	setLogo()
     //	显示当前用户
     showCurrentUser();
 

@@ -64,24 +64,24 @@ var ERROR = {
 //判断手机号格式
 
 function checkMobile(mobile) {
-    if(!(/^1[3|4|5|8|7][0-9]\d{8}$/.test(mobile))) {
-        mui.alert('手机号格式不正确');
-        return false;
-    } else {
-        return true;
-    }
+	if(!(/^1[3|4|5|8|7][0-9]\d{8}$/.test(mobile))) {
+		mui.alert('手机号格式不正确');
+		return false;
+	} else {
+		return true;
+	}
 }
 
 // 时区转时间戳
-function GMTToStr(time){
-    var date = new Date(time)
-    var Str=date.getFullYear() + '-' +
-    (date.getMonth() + 1) + '-' + 
-    date.getDate() + ' ' + 
-    date.getHours() + ':' + 
-    date.getMinutes() + ':' + 
-    date.getSeconds()
-    return Str
+function GMTToStr(time) {
+	var date = new Date(time)
+	var Str = date.getFullYear() + '-' +
+		(date.getMonth() + 1) + '-' +
+		date.getDate() + ' ' +
+		date.getHours() + ':' +
+		date.getMinutes() + ':' +
+		date.getSeconds()
+	return Str
 }
 
 //时间戳转时间
@@ -110,7 +110,11 @@ function formatDate(timestamp) {
 	}
 	return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
 }
-
+//logo
+function setLogo() {
+	var url = "http://zaoyuan.oss-cn-qingdao.aliyuncs.com/" + window.localStorage.avatar;
+	$('#logo').attr('src', url)
+}
 //禁止浏览器后退和前进
 function advanceAndRetreat() {
 	if(window.history && window.history.pushState) {
@@ -152,10 +156,6 @@ function taskStatus(status) {
 	}
 	return statusText;
 }
-
-
-
-
 
 //光交箱状态
 //1-占用 2-空闲 3-损坏
@@ -322,7 +322,6 @@ function statusHandler(status) {
 	}
 }
 
-
 //设置光标位置函数 
 function setCursorPosition(ctrl, pos) {
 	if(ctrl.setSelectionRange) {
@@ -398,7 +397,6 @@ function checkEnter(e) {
 			e.preventDefault(); //for firefox
 	}
 }
-
 
 //	返回当前时间戳
 function currentTime() {
@@ -525,4 +523,3 @@ function ArrydifferentE(a, b) {
 		if (o[x]  ==  1)  c.push(x);
 	return(c);
 }
-

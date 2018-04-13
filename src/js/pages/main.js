@@ -1,5 +1,5 @@
 define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine,mui) {
-	advanceAndRetreat();
+//	advanceAndRetreat();
 	var priorityArry = ['低', '中低', '中', '中高', '高'];
 	var showArry = {
 		'true': '是',
@@ -11,10 +11,11 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 	getBodyHeight();
 	getProductCategory();
 	
+
 	
 //	显示当前用户
 	showCurrentUser();
-	
+	setLogo()
 //	退出操作
 	$('#out').click(function(){
 		signOut();
@@ -22,7 +23,7 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 //	storage.username;
 //	storage.realname;
 //	storage.role;
-	advanceAndRetreat();
+//	advanceAndRetreat();
 	
 	//	控制左侧显示
 	$('.sidebar-toggle').click(function(){
@@ -63,7 +64,7 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 						console.log(item);
 					})
 				})
-				mine.render("tpl/product_category_data.html", data).then(function(html) {
+				mine.render("tpl/sale_data.html", data).then(function(html) {
 					$('.task-list').html(html);
 
 					$('.task-list .btn-danger').click(function() {
