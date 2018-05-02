@@ -9,7 +9,7 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 	var editsaveId;
 	var oldData = [];
 	getBodyHeight();
-	getProductCategory();
+	getSaleInfo();
 	
 
 	
@@ -45,8 +45,7 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 		
 	});
 	
-	function getProductCategory() {
-		// mine.showLoading();
+	function getSaleInfo() {
 		var url = urlBase + '/campusSale/search/'+page+'/'+pageSize;
 		console.log(url)
 		mine.get(url).then(function(data) {
@@ -107,10 +106,10 @@ define(['jquery', 'adminlte', 'pager', 'mine','mui'], function($, A, pager, mine
 	$("#delSubmit").click(function() {
 		var id = $(this).attr('delid');
 		console.log(id);
-		delProductCategory(id);
+		delSaleInfo(id);
 	});
 
-	function delProductCategory(id) {
+	function delSaleInfo(id) {
 		mine.showLoading();
 		var url = urlBase + '/campusSale/delete/' + id;
 		mine.del(url).then(function(data) {

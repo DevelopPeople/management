@@ -4,7 +4,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
     var totalPage = 1;
     var editsaveId = '';
     pageSize = 10;
-    getComponentList(page);
+    getWorkList(page);
     var allCategory = [];
     var showArry = {
         'true': '是',
@@ -41,7 +41,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 
     })
 
-    function getComponentList(page) {
+    function getWorkList(page) {
         mine.showLoading();
         var url = urlBase + '/work/search/' + page + '/' + pageSize;
         mine.get(url).then(function(data) {
@@ -62,7 +62,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
                     startnum: startnum, //指定页码
                     elem: $('#page1'), //指定的元素
                     callback: function(n) { //回调函数
-                        getComponentList(n - 1);
+                        getWorkList(n - 1);
                     }
                 });
                 $.each(data.dataList, function(index, item) {
@@ -82,32 +82,7 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
                         $('#delname').text(delName);
                         $('#delSubmit').attr('delid', delId);
                     });
-                    //	编辑操作
-                    //							{{id}}:{{name}}:{{remaining}}:{{moduleCategoryTO.id}}:{{moduleCategoryTO.name}}:{{priority}}:{{coverImage}}
-                    //e10adc3949ba59abbe56e057f20f8831:290:99:cfcd208495d565ef66e7dff9f98764d3:摄像头模组:1:
-                    // $('.task-list .btn-info').click(function() {
-                    // 	var value = $(this).val();
-                    // 	console.log(value);
-                    // 	value = value.split(':');
-                    // 	editsaveId = value[0];
-                    // 	$('#edpname').val(value[1]);
-                    // 	$('#edpnum').val(value[2]);
-                    // 	$('#edmemo').val(value[6]);
-                    // 	console.log(value[2]);
-                    // 	if(value[3] !== "") {
-                    // 		//									alert('不是空的');
-                    // 		$("#edpcategory option").siblings().removeAttr('selected');
-                    // 		$("#edpcategory option[value=" + value[3] + "]").attr('selected', 'selected');
-                    // 	}
-                    // 	$("#edPriority option[value=" + value[5] + "]").attr('selected', 'selected');
-                    //
-                    //
-                    // 	$(".edupload-img").attr('src', 'data:image/jpeg;base64,'+value[7]);
-                    //
-                    // });
-
-
-
+                  
                 });
             }
         }).fail(function(status) {
@@ -218,13 +193,13 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
 
             }
             console.log(JSON.stringify(dataJson));
-            addComponent(dataJson)
+            addWork(dataJson)
         } else {
             mui.alert('新增招聘信息 招聘公司、工作内容、招聘图片、不能为空')
         }
     })
 
-    function addComponent(dataJson) {
+    function addWork(dataJson) {
         mine.showLoading();
         var url = urlBase + '/work/add';
         mine.post(url, dataJson).then(function(data) {
@@ -244,10 +219,10 @@ define(['jquery', 'bootstrap', 'adminlte', 'pager', 'mine','mui'], function($, B
     $('#delSubmit').click(function() {
         var id = $(this).attr('delid');
         console.log(id);
-        delComponent(id);
+        delWork(id);
     });
 
-    function delComponent(id) {
+    function delWork(id) {
         mine.showLoading();
         var url = urlBase + '/work/delete/' + id;
         mine.del(url).then(function(data) {
